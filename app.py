@@ -4,10 +4,9 @@ from PIL import Image
 import pytesseract
 import io
 
-# Set the path to Tesseract
+# Set the path to Tesseract 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-# Function to extract text from an image file
 def extract_txt_file(file_path):
     try:
         image = Image.open(file_path)
@@ -35,7 +34,6 @@ def extract_txt_unsupported_file(file_path):
     except Exception as e:
         return f"Error: {e}", None
 
-# Function to encode an image with a message
 def encode_image(input_image_path, output_image_path, message):
     img = Image.open(input_image_path)
     encoded_img = img.copy()
@@ -64,7 +62,6 @@ def encode_image(input_image_path, output_image_path, message):
 
     encoded_img.save(output_image_path, format='PNG')
 
-# Function to decode a message from an image
 def decode_image(image_path):
     img = Image.open(image_path)
     binary_message = ""
@@ -84,7 +81,6 @@ def decode_image(image_path):
 
     return message
 
-# GUI functions
 def select_image_to_extract_text():
     file_path = filedialog.askopenfilename(title="Select an Image for Text Extraction", filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
     if file_path:
@@ -122,11 +118,9 @@ def select_image_to_decode():
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
-# Create the main window
 root = tk.Tk()
 root.title("Image Processing Tool")
 
-# UI Components
 tk.Label(root, text="Message to Encode:").pack(pady=5)
 message_entry = tk.Entry(root, width=50)
 message_entry.pack(pady=5)
@@ -140,5 +134,4 @@ decode_button.pack(pady=10)
 extract_text_button = tk.Button(root, text="Extract Text from Image", command=select_image_to_extract_text)
 extract_text_button.pack(pady=10)
 
-# Run the main loop
 root.mainloop()
